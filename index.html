@@ -52,19 +52,19 @@
         var myDataPoint = L.marker([43.649119, -79.381622]).addTo(map);
 
         function getColor(d) {
-            return d > 150 ? '#800026' :
-                d > 125 ? '#BD0026' :
-                    d > 100 ? '#E31A1C' :
-                        d > 75 ? '#FC4E2A' :
-                            d > 50 ? '#FD8D3C' :
-                                d > 25 ? '#FEB24C' :
+            return d > 60000 ? '#800026' :
+                d > 50000 ? '#BD0026' :
+                    d > 40000 ? '#E31A1C' :
+                        d > 30000 ? '#FC4E2A' :
+                            d > 20000 ? '#FD8D3C' :
+                                d > 10000 ? '#FEB24C' :
                                     d > 0 ? '#FED976' :
                                         '#FFEDA0';
         }
 
         function style(feature) {
             return {
-                fillColor: getColor(feature.properties.id),
+                fillColor: getColor(feature.properties.population),
                 weight: 2,
                 opacity: 1,
                 color: 'white',
@@ -121,7 +121,7 @@
         }
 
         // load GeoJSON from an external file
-        geojson = $.getJSON("toronto_topo.geojson", function (data) {
+        geojson = $.getJSON("torontoWithPop.geojson", function (data) {
             // add GeoJSON layer to the map once the file is loaded
             L.geoJson(data, {
                 style: style,
