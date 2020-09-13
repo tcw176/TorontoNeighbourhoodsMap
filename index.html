@@ -64,7 +64,7 @@
 
         function style(feature) {
             return {
-                fillColor: getColor(feature.properties.density),
+                fillColor: getColor(feature.properties.population),
                 weight: 2,
                 opacity: 1,
                 color: 'white',
@@ -121,7 +121,7 @@
         }
 
         // load GeoJSON from an external file
-        geojson = $.getJSON("torontoWithDensity.geojson", function (data) {
+        geojson = $.getJSON("torontoWithPop.geojson", function (data) {
             // add GeoJSON layer to the map once the file is loaded
             L.geoJson(data, {
                 style: style,
@@ -140,7 +140,7 @@
         // method that we will use to update the control based on feature properties passed
         info.update = function (props) {
             this._div.innerHTML = '<h4>Toronto Neighbourhood</h4>' + (props ?
-                '<b>' + props.name + '</b><br /> id ' + props.id + '</b><br /> population density /km^2 ' + props.density
+                '<b>' + props.name + '</b><br /> id ' + props.id + '</b><br /> population density /km^2 ' + props.population
                 : 'Hover over a neighbourhood');
         };
 
