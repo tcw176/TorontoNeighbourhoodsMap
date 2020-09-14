@@ -57,14 +57,14 @@
                     d > 8000 ? '#E31A1C' :
                         d > 6000 ? '#FC4E2A' :
                             d > 4000 ? '#FD8D3C' :
-                                d > 2000 ? '#FEB24C' :
+                                d >  2000? '#FEB24C' :
                                     d > 0 ? '#FED976' :
                                         '#FFEDA0';
         }
 
         function style(feature) {
             return {
-                fillColor: getColor(feature.properties.population),
+                fillColor: getColor(feature.properties.density),
                 weight: 2,
                 opacity: 1,
                 color: 'white',
@@ -85,7 +85,7 @@
             if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
                 layer.bringToFront();
             }
-            info.update(layer.feature.density);
+            info.update(layer.feature.properties);
         }
 
         function resetFeature(e) {
@@ -140,7 +140,7 @@
         // method that we will use to update the control based on feature properties passed
         info.update = function (props) {
             this._div.innerHTML = '<h4>Toronto Neighbourhood</h4>' + (props ?
-                '<b>' + props.name + '</b><br /> id ' + props.id + '</b><br /> population density /km^2 ' + props.density
+                '<b>' + props.name + '</b><br /> id ' + props.id + '</b><br /> population ' + props.density
                 : 'Hover over a neighbourhood');
         };
 
