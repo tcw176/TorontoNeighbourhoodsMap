@@ -52,12 +52,12 @@
         var myDataPoint = L.marker([43.649119, -79.381622]).addTo(map);
 
         function getColor(d) {
-            return d > 30000 ? '#800026' :
-                d > 25000 ? '#BD0026' :
-                    d > 20000 ? '#E31A1C' :
-                        d > 15000 ? '#FC4E2A' :
-                            d > 10000 ? '#FD8D3C' :
-                                d > 5000 ? '#FEB24C' :
+            return d > 12000 ? '#800026' :
+                d > 10000 ? '#BD0026' :
+                    d > 8000 ? '#E31A1C' :
+                        d > 6000 ? '#FC4E2A' :
+                            d > 4000 ? '#FD8D3C' :
+                                d > 2000 ? '#FEB24C' :
                                     d > 0 ? '#FED976' :
                                         '#FFEDA0';
         }
@@ -85,7 +85,7 @@
             if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
                 layer.bringToFront();
             }
-            info.update(layer.feature.properties);
+            info.update(layer.feature.density);
         }
 
         function resetFeature(e) {
@@ -121,7 +121,7 @@
         }
 
         // load GeoJSON from an external file
-        geojson = $.getJSON("torontoWithPop.geojson", function (data) {
+        geojson = $.getJSON("torontoWithDensity.geojson", function (data) {
             // add GeoJSON layer to the map once the file is loaded
             L.geoJson(data, {
                 style: style,
@@ -140,7 +140,7 @@
         // method that we will use to update the control based on feature properties passed
         info.update = function (props) {
             this._div.innerHTML = '<h4>Toronto Neighbourhood</h4>' + (props ?
-                '<b>' + props.name + '</b><br /> id ' + props.id + '</b><br /> population density /km^2 ' + props.population
+                '<b>' + props.name + '</b><br /> id ' + props.id + '</b><br /> population density /km^2 ' + props.density
                 : 'Hover over a neighbourhood');
         };
 
@@ -151,7 +151,7 @@
         legend.onAdd = function (map) {
 
             var div = L.DomUtil.create('div', 'info legend'),
-                grades = [0, 5000, 10000, 15000, 20000, 25000, 30000],
+                grades = [0, 2000, 4000, 6000, 8000, 10000, 12000],
                 labels = [];
 
             // loop through our density intervals and generate a label with a colored square for each interval
